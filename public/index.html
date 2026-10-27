@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學習輔助工具</title>
+    <style>
+        body { background: #0f172a; color: #f8fafc; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .box { text-align: center; width: 100%; max-width: 600px; padding: 20px; }
+        input[type="text"] { width: 70%; padding: 12px 15px; font-size: 16px; border: 1px solid #334155; border-radius: 8px 0 0 8px; background: #1e293b; color: white; outline: none; }
+        button { padding: 12px 20px; font-size: 16px; background: #3b82f6; color: white; border: none; border-radius: 0 8px 8px 0; cursor: pointer; }
+        button:hover { background: #2563eb; }
+        form { display: flex; justify-content: center; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>線上查詢工具</h1>
+        <p>輸入你想瀏覽的網址</p>
+        <form id="proxy-form">
+            <input id="target-url" type="text" placeholder="https://..." autocomplete="off" required />
+            <button type="submit">前往</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('proxy-form');
+        const input = document.getElementById('target-url');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let url = input.value.trim();
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+            // 導向我們寫好的 Vercel API 路由並帶入目標網址
+            window.location.href = `/api/proxy?url=${encodeURIComponent(url)}`;
+        });
+    </script>
+</body>
+</html>
