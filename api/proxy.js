@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
   try {
     // 💡 這裡等一下要填入你在第二步建立的 Cloudflare Worker 網址
-    const cfWorkerUrl = `https://你的-cloudflare-worker名稱.workers.dev/?url=${encodeURIComponent(targetUrl)}`;
+    const cfWorkerUrl = `https://bare1.psyduck418.workers.dev/?url=${encodeURIComponent(targetUrl)}`;
     
     const response = await fetch(cfWorkerUrl, {
       method: req.method,
